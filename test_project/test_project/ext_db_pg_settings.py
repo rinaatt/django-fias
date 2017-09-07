@@ -1,5 +1,8 @@
 from .settings import *
 
+INSTALLED_APPS += [
+    'django.contrib.postgres',
+]
 
 DATABASES['fias'] = {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -13,7 +16,10 @@ DATABASES['fias'] = {
 FIAS_DATABASE_ALIAS = 'fias'
 DATABASE_ROUTERS = ['fias.routers.FIASRouter']
 
+FIAS_SUGGEST_BACKEND = 'fias.suggest.backends.postgres_fts'
+
 try:
     from .ext_db_pg_settings_local import *
 except ImportError:
+    print('Import Error')
     pass

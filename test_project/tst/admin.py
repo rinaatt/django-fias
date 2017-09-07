@@ -11,7 +11,8 @@ class ItemAdmin(admin.ModelAdmin):
 admin.site.register(Item, ItemAdmin)
 admin.site.register(ItemWithArea, ItemAdmin)
 
-#admin.site.register(CachedAddress, ItemAdmin)
-#admin.site.register(CachedAddressWithArea, ItemAdmin)
-#admin.site.register(CachedAddressWithHouse, ItemAdmin)
-#admin.site.register(NullableAddressItem, ItemAdmin)
+
+# admin.site.register(CachedAddress, ItemAdmin)
+# admin.site.register(CachedAddressWithArea, ItemAdmin)
+# admin.site.register(CachedAddressWithHouse, ItemAdmin)
+# admin.site.register(NullableAddressItem, ItemAdmin)

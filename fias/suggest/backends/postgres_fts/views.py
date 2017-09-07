@@ -1,20 +1,15 @@
-# coding: utf-8
-from __future__ import unicode_literals, absolute_import
-
 from django.db import connections, OperationalError
 from django.http import Http404, JsonResponse
 from django.utils.encoding import smart_text
 from django.views.generic.list import BaseListView
+from django.contrib.postgres.search import SearchQuery, SearchVector
 from django_select2.views import AutoResponseView
 
-from .config import SPHINX_ADDROBJ_INDEX, SEARCHD_CONNECTION
-from fias.models import AddrObj
-
-connections.databases['fias_search'] = SEARCHD_CONNECTION
+from fias.models import AddrObj, AddrObjIndex
 
 
 def dict_fetchall(cursor):
-    "Return all rows from a cursor as a dict"
+    """Return all rows from a cursor as a dict"""
     columns = [col[0] for col in cursor.description]
     return [
         dict(zip(columns, row))
@@ -22,7 +17,10 @@ def dict_fetchall(cursor):
     ]
 
 
-class SphinxResponseView(AutoResponseView):
+class PostgresResponseView(AutoResponseView):
+    term: str = None
+    object_list: list = None
+    widget = None
 
     def get(self, request, *args, **kwargs):
         """
@@ -58,20 +56,10 @@ class SphinxResponseView(AutoResponseView):
         })
 
     def get_queryset(self):
-
-        try:
-            cur = connections['fias_search'].cursor()
-
-            query = 'SELECT aoguid, fullname FROM {0} WHERE MATCH(%s) ORDER BY item_weight DESC, ' \
-                    'weight() DESC LIMIT 0,50 OPTION field_weights=(' \
-                    'formalname=100, fullname=80' \
-                    ')'.format(SPHINX_ADDROBJ_INDEX)
-
-            cur.execute(query, (self.term + '*',))
-
-            return dict_fetchall(cur)
-        except OperationalError:
-            return []
+        qs = AddrObjIndex.objects\
+            .filter(search_vector=self.term)\
+            .order_by('item_weight')
+        return qs.values('aoguid', 'fullname')[0:50]
 
 
 class GetAreasListView(BaseListView):

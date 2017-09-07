@@ -1,10 +1,10 @@
 
 test_project/static/*
-
+test_project/logs/*.log
 *.sqlite*
 
 # Intellij Idea
 /.idea/*
 
-test_project/test_project/*_settings_local.py
+test_project/test_project/*settings_local.py
 test_project/fias

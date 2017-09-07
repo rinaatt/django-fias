@@ -47,13 +47,9 @@ def get_table_names(tables):
     return tables if tables else TABLES
 
 
-def load_complete_data(path=None,
-                       data_format='xml',
-                       truncate=False,
-                       limit=10000, tables=None,
-                       keep_indexes=False,
-                       tempdir=None,
-                       ):
+def load_complete_data(path=None, data_format='xml', truncate=False,
+                       limit=10000, tables=None, keep_indexes=False,
+                       tempdir=None):
 
     tablelist = get_tablelist(path=path, data_format=data_format, tempdir=tempdir)
 

@@ -12,4 +12,4 @@ from .stead import *
 from .status import *
 
 from .address import *
-from .sphinx import AddrObjIndex
+from .search import AddrObjIndex

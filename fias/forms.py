@@ -13,8 +13,8 @@ from fias.config import SUGGEST_AREA_VIEW
 class AddressSelect2Widget(ModelSelect2Widget):
     search_fields = ['parentguid__exact']
 
-    def build_attrs(self, extra_attrs=None, **kwargs):
-        attrs = super(AddressSelect2Widget, self).build_attrs(extra_attrs=extra_attrs, **kwargs)
+    def build_attrs(self, *args, **kwargs):
+        attrs = super(AddressSelect2Widget, self).build_attrs(*args, **kwargs)
 
         # Вручную задаем длину поля, чтоб текст был читаем
         attrs.setdefault('style', 'min-width: 300px;')

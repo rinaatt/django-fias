@@ -13,7 +13,8 @@ def get_simple_field(field):
     params = dict(
         db_index=False,
         primary_key=False,
-        unique=field.unique,
+        # unique=field.unique,
+        unique=False,
         blank=field.blank,
         null=field.null,
     )
@@ -32,6 +33,7 @@ def get_simple_field(field):
     simple_field = field.__class__(**params)
     simple_field.column = field.column
     simple_field.model = field.model
+    simple_field.name = field.name
 
     return simple_field
 
