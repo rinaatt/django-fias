@@ -19,3 +19,7 @@ class AddrObjIndex(models.Model):
     fullname = models.TextField()
     item_weight = models.PositiveSmallIntegerField(default=64)
     search_vector = SearchVectorField(editable=False, null=True)
+
+    @classmethod
+    def get_db_table(cls):
+        return cls._meta.db_table

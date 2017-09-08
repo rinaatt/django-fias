@@ -14,6 +14,7 @@ import re
 
 connection = connections[DATABASE_ALIAS]
 
+
 def _get_database_engine():
     _engine = connection.vendor
 
@@ -22,7 +23,8 @@ def _get_database_engine():
     elif 'postgresql' in _engine or 'postgis' in _engine:
         return 'pgsql'
 
-    raise ImproperlyConfigured("Only MySQL and PostgreSQL, and PostGIS engines are supported by FIAS.")
+    raise ImproperlyConfigured("Only MySQL and PostgreSQL, and PostGIS "
+                               "engines are supported by FIAS.")
 
 
 def _get_template(name):
@@ -39,23 +41,22 @@ def _get_sphinx_template(name):
 try:
     _get_sql_template('query')
 except TemplateDoesNotExist:
-    raise ImproperlyConfigured('FIAS: database backend `{0}` '
-                               'is not supported with `sphinx` suggest backend!'.format(connection.vendor))
+    raise ImproperlyConfigured(
+        'FIAS: database backend `{0}` is not supported with'
+        ' `sphinx` suggest backend!'.format(connection.vendor))
 
 
 def render_sphinx_source():
-
+    db = settings.DATABASES[DATABASE_ALIAS]
     ctx = {
         'db_type': _get_database_engine(),
-        'db_host': settings.DATABASES[DATABASE_ALIAS]['HOST'],
-        'db_port': settings.DATABASES[DATABASE_ALIAS]['PORT'],
-        'db_name': settings.DATABASES[DATABASE_ALIAS]['NAME'],
-        'db_user': settings.DATABASES[DATABASE_ALIAS]['USER'],
-        'db_password': settings.DATABASES[DATABASE_ALIAS]['PASSWORD'],
-
+        'db_host': db['HOST'],
+        'db_port': db['PORT'],
+        'db_name': db['NAME'],
+        'db_user': db['USER'],
+        'db_password': db['PASSWORD'],
         'index_name': SPHINX_ADDROBJ_INDEX,
     }
-
     re_nl = re.compile(r'(?<!;)\n', re.U)
     re_strip_el = re.compile(r'^\n', re.MULTILINE)
     for query_type in ['_pre', '_post', '']:
@@ -72,16 +73,16 @@ def render_sphinx_index(path):
 
         'index_name': SPHINX_ADDROBJ_INDEX,
     }
-
     return _get_sphinx_template('index').render(Context(ctx))
+
 
 def render_sphinx_searchd_config():
     ctx = {
         'sphinx_host': SEARCHD_CONNECTION['HOST'],
         'sphinx_port': SEARCHD_CONNECTION['PORT'],
     }
-
     return _get_sphinx_template('sphinx').render(Context(ctx))
+
 
 def render_sphinx_config(path, full=True):
     source = render_sphinx_source()

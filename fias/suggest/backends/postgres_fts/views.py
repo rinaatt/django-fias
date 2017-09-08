@@ -58,7 +58,7 @@ class PostgresResponseView(AutoResponseView):
     def get_queryset(self):
         qs = AddrObjIndex.objects\
             .filter(search_vector=self.term)\
-            .order_by('item_weight')
+            .order_by('-item_weight')
         return qs.values('aoguid', 'fullname')[0:50]
 
 

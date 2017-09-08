@@ -19,7 +19,8 @@ from fias.compat import BaseCommandCompatible, DJANGO_VERSION
 
 class Command(BaseCommandCompatible):
     help = 'Fill or update FIAS database'
-    usage_str = 'Usage: ./manage.py fias [--src <path|filename|url|AUTO> [--truncate]' \
+    usage_str = 'Usage: ./manage.py fias' \
+                ' [--src <path|filename|url|AUTO> [--truncate]' \
                 ' [--i-know-what-i-do]]'\
                 ' [--update [--skip]]'\
                 ' [--format <xml|dbf>] [--limit=<N>] [--tables=<{0}>]'\
@@ -34,7 +35,8 @@ class Command(BaseCommandCompatible):
             "action": "store",
             "dest": "src",
             "default": None,
-            "help": "Load dir|file|url into DB. If not specified, the source is automatically selected"
+            "help": "Load dir|file|url into DB. If not specified, "
+                    "the source is automatically selected"
         },
         "--truncate": {
             "action": "store_true",
