@@ -3,6 +3,7 @@ from __future__ import unicode_literals, absolute_import
 from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
+from ..app import APP_LABEL
 
 __all__ = ['Version', 'Status']
 
@@ -20,7 +21,7 @@ class VersionManager(models.Manager):
 class Version(models.Model):
 
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
 
     objects = VersionManager()
 
@@ -41,7 +42,7 @@ class Version(models.Model):
 class Status(models.Model):
 
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
 
     table = models.CharField(primary_key=True, max_length=15)
     ver = models.ForeignKey(Version)

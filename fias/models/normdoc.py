@@ -4,8 +4,8 @@ from __future__ import unicode_literals, absolute_import
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
-from fias.fields import UUIDField
-from ..apps import APP_LABEL
+from ..fields import UUIDField
+from ..app import APP_LABEL
 
 __all__ = ['NormDoc', 'NDocType']
 

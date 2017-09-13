@@ -5,8 +5,9 @@ from django.db import models
 from django.utils.text import force_text
 from django.utils.translation import ugettext_lazy as _
 
-from fias.models.addrobj import AddrObj
-from fias.fields import AddressField, ChainedAreaField
+from ..fields import AddressField, ChainedAreaField
+from ..app import APP_LABEL
+from .addrobj import AddrObj
 
 __all__ = ['FIASAddress', 'FIASAddressWithArea',
            'FIASHouse',
@@ -16,6 +17,7 @@ __all__ = ['FIASAddress', 'FIASAddressWithArea',
 class FIASAddress(models.Model):
 
     class Meta:
+        app_label = APP_LABEL
         abstract = True
 
     address = AddressField(verbose_name=_('address'), related_name='+')
@@ -62,6 +64,7 @@ class FIASAddress(models.Model):
 class FIASAddressWithArea(FIASAddress):
 
     class Meta:
+        app_label = APP_LABEL
         abstract = True
 
     area = ChainedAreaField(AddrObj, address_field='address', related_name='+')
@@ -70,6 +73,7 @@ class FIASAddressWithArea(FIASAddress):
 class FIASHouse(models.Model):
 
     class Meta:
+        app_label = APP_LABEL
         abstract = True
 
     house = models.CharField(_('house number'), max_length=20, null=True, blank=True)
@@ -104,10 +108,12 @@ class GetAddressMixin(object):
 class FIASFullAddress(FIASAddress, FIASHouse, GetAddressMixin):
 
     class Meta:
+        app_label = APP_LABEL
         abstract = True
 
 
 class FIASFullAddressWithArea(FIASAddressWithArea, FIASHouse, GetAddressMixin):
 
     class Meta:
+        app_label = APP_LABEL
         abstract = True

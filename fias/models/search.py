@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.postgres.search import SearchVectorField
 
 from ..fields import UUIDField
-from ..apps import APP_LABEL
+from ..app import APP_LABEL
 
 
 class AddrObjIndex(models.Model):
@@ -14,10 +14,10 @@ class AddrObjIndex(models.Model):
         app_label = APP_LABEL
 
     aoguid = UUIDField()
-    aolevel = models.PositiveSmallIntegerField()
+    aolevel = models.PositiveSmallIntegerField(db_index=True)
     scname = models.TextField()
     fullname = models.TextField()
-    item_weight = models.PositiveSmallIntegerField(default=64)
+    item_weight = models.PositiveSmallIntegerField(default=64, db_index=True)
     search_vector = SearchVectorField(editable=False, null=True)
 
     @classmethod

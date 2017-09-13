@@ -3,9 +3,10 @@ from __future__ import unicode_literals, absolute_import
 
 from django.db import models
 
-from fias.fields import UUIDField
-from fias.models.addrobj import AddrObj
-from fias.models.common import Common
+from ..fields import UUIDField
+from ..app import APP_LABEL
+from .addrobj import AddrObj
+from .common import Common
 
 __all__ = ['LandMark']
 
@@ -15,7 +16,7 @@ class LandMark(Common):
     Описание мест расположения имущественных объектов
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Место расположения имущественного объекта'
         verbose_name_plural = 'Места расположения имущественных объектов'
 

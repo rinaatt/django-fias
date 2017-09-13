@@ -4,6 +4,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from ..app import APP_LABEL
 
 __all__ = ['SocrBase']
 
@@ -14,7 +15,7 @@ class SocrBase(models.Model):
     Тип адресного объекта
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Тип адресного объекта'
         verbose_name_plural = 'Типы адресных объектов'
         index_together = (

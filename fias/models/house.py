@@ -3,10 +3,11 @@ from __future__ import unicode_literals, absolute_import
 
 from django.db import models
 
-from fias.fields import UUIDField
-from fias.models.addrobj import AddrObj
-from fias.models.common import Common, June2016Update
-from fias.models.status import EstStat, IntvStat, StrStat
+from ..fields import UUIDField
+from ..app import APP_LABEL
+from .addrobj import AddrObj
+from .common import Common, June2016Update
+from .status import EstStat, IntvStat, StrStat
 
 __all__ = ['House', 'HouseInt']
 
@@ -16,7 +17,7 @@ class House(June2016Update):
     Сведения по номерам домов улиц городов и населенных пунктов
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Номер дома'
         verbose_name_plural = 'Номера домов'
 
@@ -43,7 +44,7 @@ class HouseInt(Common):
     Интервалы домов
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Интервал домов'
         verbose_name_plural = 'Интервалы домов'
 

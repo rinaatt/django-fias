@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'fias',
     'django_select2',
     'tst',
@@ -94,14 +95,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = []
 
-FIAS_TABLES = [
-    'normdoc',
-    'landmark',
-    'house',
-    'room',
-    'stead',
-    'houseint',
-]
+# FIAS_TABLES = []
 
 # FIAS_TABLE_ROW_FILTERS = {
 #     'addrobj': (

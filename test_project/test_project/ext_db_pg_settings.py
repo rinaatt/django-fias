@@ -1,11 +1,7 @@
 from .settings import *
 
-INSTALLED_APPS += [
-    'django.contrib.postgres',
-]
-
 DATABASES['fias'] = {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'fias_test',
     'USER': 'postgres',
     'PASSWORD': '',

@@ -4,9 +4,10 @@ from __future__ import unicode_literals, absolute_import
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
-from fias.fields import UUIDField
-from fias.models.house import House
-from fias.models.status import OperStat
+from ..fields import UUIDField
+from ..app import APP_LABEL
+from .house import House
+from .status import OperStat
 
 __all__ = ['Room']
 
@@ -17,7 +18,7 @@ class Room(models.Model):
     Классификатор помещений
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Помещение'
         verbose_name_plural = 'Помещения'
 

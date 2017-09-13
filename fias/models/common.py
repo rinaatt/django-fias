@@ -2,7 +2,8 @@
 from __future__ import unicode_literals, absolute_import
 
 from django.db import models
-from fias.fields import UUIDField
+from ..fields import UUIDField
+from ..app import APP_LABEL
 
 __all__ = ['Common', 'June2016Update']
 
@@ -10,6 +11,7 @@ __all__ = ['Common', 'June2016Update']
 class Common(models.Model):
 
     class Meta:
+        app_label = APP_LABEL
         abstract = True
 
     ifnsfl = models.CharField('Код ИФНС ФЗ', max_length=4, blank=True, null=True)

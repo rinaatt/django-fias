@@ -1,11 +1,14 @@
+from functools import reduce
 from django.db import connections, OperationalError
+from django.db.models import Q
 from django.http import Http404, JsonResponse
 from django.utils.encoding import smart_text
 from django.views.generic.list import BaseListView
-from django.contrib.postgres.search import SearchQuery, SearchVector
+from django.contrib.postgres.search import SearchQuery, SearchVector, TrigramSimilarity
 from django_select2.views import AutoResponseView
 
-from fias.models import AddrObj, AddrObjIndex
+from fias.models import AddrObj
+from .proxy import AddrObjIndexProxy
 
 
 def dict_fetchall(cursor):
@@ -51,18 +54,18 @@ class PostgresResponseView(AutoResponseView):
                     # 'level': obj['aolevel']
                 }
                 for obj in context['object_list']
-                ],
+            ],
             'more': context['page_obj'].has_next()
         })
 
     def get_queryset(self):
-        qs = AddrObjIndex.objects\
-            .filter(search_vector=self.term)\
-            .order_by('-item_weight')
-        return qs.values('aoguid', 'fullname')[0:50]
+        return AddrObjIndexProxy.search \
+            .term(self.term).values('aoguid', 'fullname')[0:50]
 
 
 class GetAreasListView(BaseListView):
+    term: str = None
+    object_list: list = None
 
     def get(self, request, *args, **kwargs):
         self.term = kwargs.get('term', request.GET.get('term', ''))

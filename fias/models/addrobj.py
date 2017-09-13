@@ -5,10 +5,10 @@ import six
 from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
 
-from fias.fields import UUIDField
-from fias.models.common import June2016Update
-from fias.models.status import CenterSt, CurentSt, OperStat
-
+from ..fields import UUIDField
+from ..app import APP_LABEL
+from .common import June2016Update
+from .status import CenterSt, CurentSt, OperStat
 
 __all__ = ['AddrObj']
 
@@ -19,7 +19,7 @@ class AddrObj(June2016Update):
     Классификатор адресообразующих элементов
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Адресообразующий элемент'
         verbose_name_plural = 'Адресообразующие элементы'
         index_together = (

@@ -3,6 +3,7 @@ from __future__ import unicode_literals, absolute_import
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from ..app import APP_LABEL
 
 __all__ = [
     'ActStat', 'CenterSt', 'CurentSt',
@@ -17,7 +18,7 @@ class ActStat(models.Model):
     Статус актуальности ФИАС
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Статус актуальности ФИАС'
         verbose_name_plural = 'Статусы актуальности ФИАС'
 
@@ -34,7 +35,7 @@ class CenterSt(models.Model):
     Статус центра
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Статус центра'
         verbose_name_plural = 'Статусы центров'
 
@@ -51,7 +52,7 @@ class CurentSt(models.Model):
     Статус актуальности КЛАДР 4.0
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Статус актуальности КЛАДР 4.0'
         verbose_name_plural = 'Статусы актуальности КЛАДР 4.0'
 
@@ -68,7 +69,7 @@ class EstStat(models.Model):
     Признак владения
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Признак владения'
         verbose_name_plural = 'Признаки владения'
 
@@ -86,7 +87,7 @@ class HSTStat(models.Model):
     Статус состояния домов
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Статус состояния домов'
         verbose_name_plural = 'Статусы состояния домов'
 
@@ -103,7 +104,7 @@ class IntvStat(models.Model):
     Статус интервалов домов
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Статус интервала домов'
         verbose_name_plural = 'Статусы интервалов домов'
 
@@ -121,7 +122,7 @@ class OperStat(models.Model):
     Статус действия
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Статус действия'
         verbose_name_plural = 'Статусы действия'
 
@@ -138,7 +139,7 @@ class StrStat(models.Model):
     Признак строения
     """
     class Meta:
-        app_label = 'fias'
+        app_label = APP_LABEL
         verbose_name = 'Признак строения'
         verbose_name_plural = 'Признаки строения'
 
